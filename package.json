@@ -1,0 +1,46 @@
+{
+  "name": "sql-assistant",
+  "displayName": "SQL Assistant",
+  "description": "Advanced SQL development tools",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:sql",
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [{
+      "id": "sql",
+      "aliases": ["SQL", "sql"],
+      "extensions": [".sql"],
+      "configuration": "./language-configuration.json"
+    }],
+    "commands": [{
+      "command": "sql-assistant.formatQuery",
+      "title": "Format SQL Query"
+    }],
+    "snippets": [{
+      "language": "sql",
+      "path": "./snippets/sql.json"
+    }]
+  },
+  "dependencies": {
+    "sql-formatter": "^15.4.6",
+    "vscode-languageclient": "^7.0.0",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12",
+    "@vscode/extension-telemetry": "^0.9.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.85.0"
+  }
+}

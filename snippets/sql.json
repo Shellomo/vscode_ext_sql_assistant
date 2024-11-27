@@ -1,0 +1,31 @@
+{
+  "SELECT Query": {
+    "prefix": "sel",
+    "body": [
+      "SELECT ${1:columns}",
+      "FROM ${2:table}",
+      "WHERE ${3:condition};"
+    ],
+    "description": "Basic SELECT query"
+  },
+  "JOIN": {
+    "prefix": "join",
+    "body": [
+      "JOIN ${1:table}",
+      "ON ${2:condition}"
+    ],
+    "description": "JOIN clause"
+  },
+  "CREATE TABLE": {
+    "prefix": "crtable",
+    "body": [
+      "CREATE TABLE ${1:table_name} (",
+      "  ${2:column_name} ${3:data_type} ${4:constraints},",
+      "  PRIMARY KEY (${5:column_name})",
+      ");"
+    ],
+    "description": "Create new table"
+  }
+}
+
+
