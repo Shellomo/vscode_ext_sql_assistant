@@ -5,6 +5,10 @@
   "version": "1.0.0",
   "publisher": "Shellomo",
   "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shellomo/vscode_ext_sql_assistant"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
