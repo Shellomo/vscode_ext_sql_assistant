@@ -33,27 +33,43 @@ export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('sql-assistant.formatQuery', () => {
         TelemetryLog('info', 'Formatting SQL query');
         const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            const document = editor.document;
-            const selection = editor.selection;
-            const text = document.getText(selection);
+        if (!editor) {
+            return;
+        }
 
-            try {
-                const formatted = format(text, {
-                    language: 'sql',
-                    tabWidth: 2,
-                    useTabs: false,
-                    keywordCase: 'upper',
-                    indentStyle: 'standard'
-                });
+        const document = editor.document;
+        const selection = editor.selection;
 
-                editor.edit(editBuilder => {
+        // If no text is selected, use the entire document
+        const text = selection.isEmpty
+            ? document.getText()
+            : document.getText(selection);
+
+        try {
+            const formatted = format(text, {
+                language: 'sql',
+                tabWidth: 2,
+                useTabs: false,
+                keywordCase: 'upper',
+                indentStyle: 'standard'
+            });
+
+            editor.edit(editBuilder => {
+                if (selection.isEmpty) {
+                    // If no selection, replace entire document
+                    const fullRange = new vscode.Range(
+                        document.positionAt(0),
+                        document.positionAt(document.getText().length)
+                    );
+                    editBuilder.replace(fullRange, formatted);
+                } else {
                     editBuilder.replace(selection, formatted);
-                });
-            } catch (err: any) {
-                TelemetryLog('error', 'Failed to format SQL query', {error: err.message});
-                vscode.window.showErrorMessage('Failed to format SQL: ' + err.message);
-            }
+                }
+            });
+        } catch (err: any) {
+            console.error('Formatting error:', err); // Add this log
+            TelemetryLog('error', 'Failed to format SQL query', {error: err.message});
+            vscode.window.showErrorMessage('Failed to format SQL: ' + err.message);
         }
     });
 

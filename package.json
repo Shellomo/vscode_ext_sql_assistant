@@ -15,6 +15,11 @@
     "onLanguage:sql",
     "onStartupFinished"
   ],
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile"
+  },
   "main": "./out/extension.js",
   "contributes": {
     "languages": [{
@@ -41,6 +46,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
-    "@types/vscode": "^1.85.0"
+    "@types/vscode": "^1.85.0",
+    "typescript": "^4.5.4"
   }
 }
