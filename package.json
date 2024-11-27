@@ -1,8 +1,10 @@
 {
   "name": "sql-assistant",
-  "displayName": "SQL Assistant",
-  "description": "Advanced SQL development tools",
+  "displayName": "SQL Assistant Pro",
+  "description": "SQL language support for VS Code with SQL formatter, snippets, and more",
   "version": "1.0.0",
+  "publisher": "Shellomo",
+  "icon": "media/icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -22,20 +24,31 @@
   },
   "main": "./out/extension.js",
   "contributes": {
-    "languages": [{
-      "id": "sql",
-      "aliases": ["SQL", "sql"],
-      "extensions": [".sql"],
-      "configuration": "./language-configuration.json"
-    }],
-    "commands": [{
-      "command": "sql-assistant.formatQuery",
-      "title": "Format SQL Query"
-    }],
-    "snippets": [{
-      "language": "sql",
-      "path": "./snippets/sql.json"
-    }]
+    "languages": [
+      {
+        "id": "sql",
+        "aliases": [
+          "SQL",
+          "sql"
+        ],
+        "extensions": [
+          ".sql"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "sql-assistant.formatQuery",
+        "title": "Format SQL Query"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "sql",
+        "path": "./snippets/sql.json"
+      }
+    ]
   },
   "dependencies": {
     "sql-formatter": "^15.4.6",
